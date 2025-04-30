@@ -1,0 +1,352 @@
+[
+    {
+        "nomor" : 1,
+        "pertanyaan" : "Tag HTML manakah yang digunakan untuk membuat tautan (link)?.",
+        "tipe": "pilihan_ganda",
+        "pilihan":[
+            "<link>",
+            "<a>",
+            "<href>",
+            "<url>"
+        ],
+        "jawaban_benar":"<a>"
+    },
+    {
+        "nomor" : 2,
+        "pertanyaan" : "Tag manakah yang digunakan untuk menampilkan gambar di HTML? ",
+        "tipe": "pilihan_ganda",
+        "pilihan":[
+            "<pic>",
+            "<image>",
+            "<img>",
+            "<src>"
+        ],
+        "jawaban_benar":"<img>"
+    },
+    {
+        "nomor" : 3,
+        "pertanyaan" : "Elemen manakah yang digunakan untuk membuat daftar tidak berurutan?",
+        "tipe": "pilihan_ganda",
+        "pilihan":[
+            "<ol>",
+            "<ul>",
+            "<dl>",
+            "<li>"
+        ],
+        "jawaban_benar":"<ul>"
+    },
+    {
+        "nomor" : 4,
+        "pertanyaan" : "Tag <table> digunakan untuk",
+        "tipe": "pilihan_ganda",
+        "pilihan":[
+            "Menampilkan gambar",
+            "Menampilkan form",
+            "Membuat tabel",
+            "Menampilkan video"
+        ],
+        "jawaban_benar":"Membuat tabel"
+    },
+    {
+        "nomor" : 5,
+        "pertanyaan" : "Atribut HTML untuk menambahkan teks alternatif pada gambar adalah",
+        "tipe": "pilihan_ganda",
+        "pilihan":[
+            "alt",
+            "text",
+            "deskripsi",
+            "label"
+        ],
+        "jawaban_benar":"alt"
+    },
+    {
+        "nomor" : 6,
+        "pertanyaan" : "Dalam HTML, elemen <form> biasanya digunakan untuk",
+        "tipe": "pilihan_ganda",
+        "pilihan":[
+            "Menampilkan tabel",
+            "Menyisipkan video",
+            "Mengirim data ke server",
+            "Membuat layout halaman"
+        ],
+        "jawaban_benar":"Mengirim data ke server"
+    },
+    {
+        "nomor" : 7,
+        "pertanyaan" : "Bagaimana cara mengatur warna teks menggunakan CSS?",
+        "tipe": "pilihan_ganda",
+        "pilihan":[
+            "text-color: red;",
+            "font-color: red;",
+            "color: red;",
+            "textstyle: red;"
+        ],
+        "jawaban_benar":"color: red;"
+    },
+    {
+        "nomor" : 8,
+        "pertanyaan" : "Selector manakah yang digunakan untuk menargetkan elemen dengan ID 'header'?",
+        "tipe": "pilihan_ganda",
+        "pilihan":[
+            "#header",
+            ".header",
+            "header#",
+            "*header"
+        ],
+        "jawaban_benar":"#header"
+    },
+    {
+        "nomor" : 9,
+        "pertanyaan" : "Properti CSS untuk mengatur ukuran huruf adalah",
+        "tipe": "pilihan_ganda",
+        "pilihan":[
+            "text-size",
+            "font_size",
+            "size-font",
+            "letter-size"
+        ],
+        "jawaban_benar":"font-size"
+    },
+    {
+        "nomor" : 10,
+        "pertanyaan" : "Manakah yang benar tentang penggunaan class di CSS?",
+        "tipe": "pilihan_ganda",
+        "pilihan":[
+            "Diawali dengan @",
+            "Diawali dengan #",
+            "Diawali dengan .",
+            "Tidak diawali simbol"
+        ],
+        "jawaban_benar":"Diawali dengan ."
+    },
+    {
+        "nomor" : 11,
+        "pertanyaan" : "Untuk mengatur semua elemen <p> agar berwarna biru, penulisan CSS-nya adalah",
+        "tipe": "pilihan_ganda",
+        "pilihan":[
+            "p {color: blue;}",
+            ".p {color: blue;}",
+            "#p {color: blue;}",
+            "*p {color: blue;}"
+        ],
+        "jawaban_benar":"p {color: blue;}"
+    },
+    {
+        "nomor" : 12,
+        "pertanyaan" : "Bagaimana cara menambahkan file CSS eksternal ke HTML?",
+        "tipe": "pilihan_ganda",
+        "pilihan":[
+            "<css src='style.css'>",
+            "style src='style.css'>",
+            "<link rel='stylesheet' href='style.css'>",
+            "<script href='style.css'>"
+        ],
+        "jawaban_benar":"<link rel='stylesheet' href='style.css'>"
+    },
+    {
+        "nomor" : 13,
+        "pertanyaan" : "Manakah cara yang benar untuk menampilkan pesan ke pengguna?",
+        "tipe": "pilihan_ganda",
+        "pilihan":[
+            "msg('Hello');",
+            "alert('Hello');",
+            "popup('Hello');",
+            "show('Hello');"
+        ],
+        "jawaban_benar":"alert('Hello');"
+    },
+    {
+        "nomor" : 14,
+        "pertanyaan" : "Variabel di JavaScript dapat dideklarasikan menggunakan kata kunci berikut, kecuali",
+        "tipe": "pilihan_ganda",
+        "pilihan":[
+            "var",
+            "let",
+            "const",
+            "define"
+        ],
+        "jawaban_benar":"define"
+    },
+    {
+        "nomor" : 15,
+        "pertanyaan" : "Fungsi console.log() digunakan untuk",
+        "tipe": "pilihan_ganda",
+        "pilihan":[
+            "Menampilkan alert",
+            "Menampilkan pesan di browser",
+            "Menampilkan hasil di konsol",
+            "Menghentikan eksekusi program"
+        ],
+        "jawaban_benar":" Menampilkan hasil di konsol"
+    },
+    {
+        "nomor" : 16,
+        "pertanyaan" : "Operator === dalam JavaScript berfungsi untuk",
+        "tipe": "pilihan_ganda",
+        "pilihan":[
+            "Membandingkan nilai",
+            "Membandingkan referensi",
+            "Membandingkan nilai dan tipe",
+            "Membandingkan panjang string"
+        ],
+        "jawaban_benar":"Membandingkan nilai dan tipe"
+    },
+    {
+        "nomor" : 17,
+        "pertanyaan" : "Manakah yang merupakan cara deklarasi fungsi di JavaScript?",
+        "tipe": "pilihan_ganda",
+        "pilihan":[
+            "function = myFunc() {}",
+            "def myFunc() {}",
+            "function myFunc() {}",
+            "func myFunc() {}"
+        ],
+        "jawaban_benar":"function myFunc() {}"
+    },
+    {
+        "nomor" : 18,
+        "pertanyaan" : "Apa hasil dari: type of '123'?",
+        "tipe": "pilihan_ganda",
+        "pilihan":[
+            "number",
+            "string",
+            "integer",
+            "text"
+        ],
+        "jawaban_benar":"string"
+    },
+    {
+        "nomor" : 19,
+        "pertanyaan" : "Manakah contoh penulisan variabel yang benar dalam JavaScript?",
+        "tipe": "pilihan_ganda",
+        "pilihan":[
+            "var 2value = 5;",
+            "let value-2 = 10;",
+            "const value2 = 15;",
+            "int value = 20;"
+        ],
+        "jawaban_benar":"const value2 = 15;"
+    },
+    {
+        "nomor" : 20,
+        "pertanyaan" : "JSON merupakan singkatan dari",
+        "tipe": "pilihan_ganda",
+        "pilihan":[
+            "Java Syntax Object Notation",
+            "Java Structure Object Name",
+            "JavaScript Object Notation",
+            "Java Standard Object Name"
+        ],
+        "jawaban_benar":"JavaScript Object Notation"
+    },
+    {
+        "nomor" : 21,
+        "pertanyaan" : "Struktur JSON terdiri dari",
+        "tipe": "pilihan_ganda",
+        "pilihan":[
+            "Key dan value",
+            "Tag dan atribut",
+            "Fungsi dan objek",
+            "Arrray dan method"
+        ],
+        "jawaban_benar":"Key dan value"
+    },
+    {
+        "nomor" : 22,
+        "pertanyaan" : "Manakah format array yang valid dalam JSON?",
+        "tipe": "pilihan_ganda",
+        "pilihan":[
+            "{'data': '1', '2', '3'}",
+            "{data': [1, 2, 3]}",
+            "{data': {1, 2, 3}}",
+            "{data'= [1, 2, 3]}"
+        ],
+        "jawaban_benar":"{data': [1, 2, 3]}"
+    },
+    {
+        "nomor" : 23,
+        "pertanyaan" : "JSON adalah format yang digunakan untuk",
+        "tipe": "pilihan_ganda",
+        "pilihan":[
+            "Menyimpan gambar",
+            "Mengatur gaya halaman",
+            "Menyimpan dan mentransfer data",
+            "Menyimpan file video"
+        ],
+        "jawaban_benar":"Menyimpan dan mentransfer data"
+    },
+    {
+        "nomor" : 24,
+        "pertanyaan" : "Manakah struktur JSON yang benar?",
+        "tipe": "pilihan_ganda",
+        "pilihan":[
+            "{name: 'Ali', age: 20}",
+            "[name: 'Ali', 'age': 20]",
+            "{name: 'Ali', 'age': 20}",
+            "(name: 'Ali', age: 20)"
+        ],
+        "jawaban_benar":"{name: 'Ali', 'age': 20}"
+    },
+    {
+        "nomor" : 25,
+        "pertanyaan" : "Dalam JSON, data harus ditulis menggunakan",
+        "tipe": "pilihan_ganda",
+        "pilihan":[
+            "Tanda kutip tunggal ' untuk nama properti",
+            "Format array [key: value]",
+            "Tanda kutip ganda ' untuk string dan nama properti",
+            "Tag seperti HTML"
+        ],
+        "jawaban_benar":"Tanda kutip ganda ' untuk string dan nama properti"
+    },
+    {
+        "nomor" : 26,
+        "pertanyaan" : "HTML adalah bahasa pemrograman.",
+        "tipe": "benar_salah",
+        "pilihan":[
+            "benar",
+            "salah"
+        ],
+        "jawaban_benar":"salah"
+    },
+    {
+        "nomor" : 27,
+        "pertanyaan" : "background-color adalah properti CSS untuk mengubah warna teks.",
+        "tipe": "benar_salah",
+        "pilihan":[
+            "benar",
+            "salah"
+        ],
+        "jawaban_benar":"salah"
+    },
+    {
+        "nomor" : 28,
+        "pertanyaan" : "Nilai warna bisa dituliskan dari format heksadesimal seperti #ffffff.",
+        "tipe": "benar_salah",
+        "pilihan":[
+            "benar",
+            "salah"
+        ],
+        "jawaban_benar":"benar"
+    },
+    {
+        "nomor" : 29,
+        "pertanyaan" : "Tipe data boolean hanya memiliki dua nilai: true dan false.",
+        "tipe": "benar_salah",
+        "pilihan":[
+            "benar",
+            "salah"
+        ],
+        "jawaban_benar":"benar"
+    },
+    {
+        "nomor" : 30,
+        "pertanyaan" : "JSON hanya mendukung tipe data string, number, array, object, boolean, dan null.",
+        "tipe": "benar_salah",
+        "pilihan":[
+            "benar",
+            "salah"
+        ],
+        "jawaban_benar":"benar"
+    }
+]
