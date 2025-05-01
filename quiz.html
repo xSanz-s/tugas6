@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz Website</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+    />
+    <style>
+      .quiz-container {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .question {
+        padding: 20px;
+        margin-bottom: 20px;
+        border: 1px solid #eee;
+        border-radius: 5px;
+      }
+
+      .options-container {
+        margin-top: 15px;
+      }
+
+      .option-item {
+        display: block;
+        padding: 10px 15px;
+        margin-bottom: 8px;
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .option-item:hover {
+        background-color: #e9ecef;
+      }
+
+      .correct-answer {
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+      }
+
+      .wrong-answer {
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container py-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="quiz-container p-4 mb-4">
+            <h1 class="text-center mb-4">Quiz Website</h1>
+
+            <div class="progress mb-4">
+              <div
+                id="progress"
+                class="progress-bar bg-primary"
+                role="progressbar"
+                style="width: 0%"
+              ></div>
+            </div>
+
+            <div id="loading" class="text-center py-5">
+              <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              <p class="mt-3">Memuat soal...</p>
+            </div>
+
+            <div id="quiz-content" style="display: none">
+              <!-- Pertanyaan akan diisi oleh JavaScript -->
+            </div>
+
+            <div class="d-flex justify-content-between mt-4">
+              <button id="prev-btn" class="btn btn-outline-primary" disabled>
+                <i class="bi bi-arrow-left"></i> Sebelumnya
+              </button>
+              <button id="next-btn" class="btn btn-primary">
+                Selanjutnya <i class="bi bi-arrow-right"></i>
+              </button>
+            </div>
+
+            <div class="text-center mt-4">
+              <button
+                id="submit-btn"
+                class="btn btn-success"
+                style="display: none"
+              >
+                Submit Quiz
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      let quizData = [];
+      let currentQuestion = 0;
+      let userAnswers = [];
+
+      async function loadQuiz() {
+        try {
+          const response = await fetch("soal.json");
+          if (!response.ok) throw new Error("Gagal memuat soal");
+
+          quizData = await response.json();
+          userAnswers = new Array(quizData.length).fill(null);
+
+          document.getElementById("loading").style.display = "none";
+          document.getElementById("quiz-content").style.display = "block";
+          showQuestion();
+        } catch (error) {
+          document.getElementById("loading").innerHTML = `
+            <div class="alert alert-danger">
+              <h4>Terjadi Kesalahan</h4>
+              <p>${error.message}</p>
+              <button onclick="location.reload()" class="btn btn-warning mt-2">
+                Coba Lagi
+              </button>
+            </div>`;
+        }
+      }
+
+      function showQuestion() {
+        const question = quizData[currentQuestion];
+        const quizContent = document.getElementById("quiz-content");
+
+        // Update progress
+        document.getElementById("progress").style.width = `${
+          ((currentQuestion + 1) / quizData.length) * 100
+        }%`;
+
+        // Build question HTML
+        let optionsHTML = question.pilihan
+          .map(
+            (option, index) => `
+          <label class="option-item">
+            <input 
+              type="${question.tipe === "benar_salah" ? "radio" : "radio"}" 
+              name="question-${question.nomor}" 
+              value="${index}"
+              ${userAnswers[currentQuestion] === index ? "checked" : ""}
+            >
+            ${option}
+          </label>
+        `
+          )
+          .join("");
+
+        quizContent.innerHTML = `
+          <div class="question">
+            <div class="question-number">Pertanyaan ${question.nomor}</div>
+            <p>${question.pertanyaan}</p>
+            <div class="options-container">${optionsHTML}</div>
+          </div>
+        `;
+
+        // Update navigation
+        document.getElementById("prev-btn").disabled = currentQuestion === 0;
+        document.getElementById("next-btn").disabled = false;
+        document.getElementById("submit-btn").style.display =
+          currentQuestion === quizData.length - 1 ? "block" : "none";
+
+        // Add event listeners
+        document.querySelectorAll('input[type="radio"]').forEach((radio) => {
+          radio.addEventListener("change", (e) => {
+            userAnswers[currentQuestion] = parseInt(e.target.value);
+          });
+        });
+      }
+
+      function nextQuestion() {
+        if (currentQuestion < quizData.length - 1) {
+          currentQuestion++;
+          showQuestion();
+        }
+      }
+
+      function prevQuestion() {
+        if (currentQuestion > 0) {
+          currentQuestion--;
+          showQuestion();
+        }
+      }
+
+      function submitQuiz() {
+        const score = quizData.reduce((acc, question, index) => {
+          const userAnswer = question.pilihan[userAnswers[index]];
+          return acc + (userAnswer === question.jawaban_benar ? 1 : 0);
+        }, 0);
+
+        alert(`Skor Anda: ${score} dari ${quizData.length}`);
+      }
+
+      // Event listeners
+      document
+        .getElementById("next-btn")
+        .addEventListener("click", nextQuestion);
+      document
+        .getElementById("prev-btn")
+        .addEventListener("click", prevQuestion);
+      document
+        .getElementById("submit-btn")
+        .addEventListener("click", submitQuiz);
+      window.addEventListener("DOMContentLoaded", loadQuiz);
+    </script>
+  </body>
+</html>
