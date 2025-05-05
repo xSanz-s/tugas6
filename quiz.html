@@ -3,220 +3,220 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quiz Website</title>
+    <title>Interactive Quiz</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
-    />
-    <style>
-      .quiz-container {
-        background-color: white;
-        border-radius: 10px;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-      }
-
-      .question {
-        padding: 20px;
-        margin-bottom: 20px;
-        border: 1px solid #eee;
-        border-radius: 5px;
-      }
-
-      .options-container {
-        margin-top: 15px;
-      }
-
-      .option-item {
-        display: block;
-        padding: 10px 15px;
-        margin-bottom: 8px;
-        background-color: #f8f9fa;
-        border: 1px solid #dee2e6;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: all 0.2s;
-      }
-
-      .option-item:hover {
-        background-color: #e9ecef;
-      }
-
-      .correct-answer {
-        background-color: #d4edda;
-        border-color: #c3e6cb;
-      }
-
-      .wrong-answer {
-        background-color: #f8d7da;
-        border-color: #f5c6cb;
-      }
-    </style>
+    <link rel="stylesheet" href="style.css" />
   </head>
+
   <body>
-    <div class="container py-5">
-      <div class="row justify-content-center">
-        <div class="col-lg-8">
-          <div class="quiz-container p-4 mb-4">
-            <h1 class="text-center mb-4">Quiz Website</h1>
-
-            <div class="progress mb-4">
-              <div
-                id="progress"
-                class="progress-bar bg-primary"
-                role="progressbar"
-                style="width: 0%"
-              ></div>
-            </div>
-
-            <div id="loading" class="text-center py-5">
-              <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
-              <p class="mt-3">Memuat soal...</p>
-            </div>
-
-            <div id="quiz-content" style="display: none">
-              <!-- Pertanyaan akan diisi oleh JavaScript -->
-            </div>
-
-            <div class="d-flex justify-content-between mt-4">
-              <button id="prev-btn" class="btn btn-outline-primary" disabled>
-                <i class="bi bi-arrow-left"></i> Sebelumnya
-              </button>
-              <button id="next-btn" class="btn btn-primary">
-                Selanjutnya <i class="bi bi-arrow-right"></i>
-              </button>
-            </div>
-
-            <div class="text-center mt-4">
-              <button
-                id="submit-btn"
-                class="btn btn-success"
-                style="display: none"
-              >
-                Submit Quiz
-              </button>
-            </div>
-          </div>
-        </div>
+    <nav class="navbar bg-body-tertiary mt-0">
+      <div class="container-fluid bg-primary navbar-dark m-0">
+        <a class="navbar-brand" href="#">
+          <img
+            src="quiz-on-computer-with-question-signs-around-svgrepo-com.svg"
+            width="30"
+            height="24"
+            class="d-inline-block align-text-top"
+          />
+          WebQuiz
+        </a>
+      </div>
+    </nav>
+    <!-- Home Section -->
+    <div id="home" class="section active">
+      <div class="text-center py-5">
+        <h1 class="display-4 mb-4">Selamat Datang di WebQuiz!</h1>
+        <button class="btn btn-primary btn-lg" onclick="showSection('rules')">
+          Mulai
+        </button>
       </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-      let quizData = [];
-      let currentQuestion = 0;
-      let userAnswers = [];
+    <!-- Aturan Section -->
+    <div id="rules" class="section" style="font-family: Arial, sans-serif">
+      <h2 class="mb-4">📝 Peraturan Kuis</h2>
+      <div class="card mb-4">
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">⏳ 15 detik per pertanyaan</li>
+            <li class="list-group-item">✅ Jawaban benar +10 poin</li>
+            <li class="list-group-item">
+              ❌ Jawaban salah ditunjukkan warna merah
+            </li>
+            <li class="list-group-item">📚 Total 30 pertanyaan</li>
+          </ul>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between">
+        <button class="btn btn-outline-secondary" onclick="showSection('home')">
+          Kembali
+        </button>
+        <button class="btn btn-primary" onclick="startQuiz()">Mulai</button>
+      </div>
+    </div>
 
-      async function loadQuiz() {
+    <!-- Quiz Section -->
+    <div id="quiz" class="section">
+      <div class="timer">
+        <div>⏳ Waktu: <span id="time">15</span>s</div>
+        <div>🏆 Skor: <span id="score">0</span></div>
+      </div>
+
+      <div id="question-container" class="mb-4"></div>
+      <div id="options-container"></div>
+
+      <button id="next-btn" class="btn btn-primary mt-4 w-100" disabled>
+        Lanjut <i class="bi bi-arrow-right"></i>
+      </button>
+    </div>
+
+    <!-- Hasil Section -->
+    <div id="result" class="section text-center">
+      <h2 class="display-4 mb-4">Hasil Kuis</h2>
+      <div class="result-score mb-4">
+        <div class="display-1" id="final-score">0</div>
+        <div class="text-muted">Total Poin</div>
+      </div>
+      <div class="d-grid gap-2">
+        <button class="btn btn-primary" onclick="location.reload()">
+          Main Lagi
+        </button>
+      </div>
+    </div>
+
+    <script>
+      let currentQuestion = 0;
+      let score = 0;
+      let timeLeft = 15;
+      let timerInterval;
+      let questions = [];
+
+      // Tampilkan section
+      function showSection(sectionId) {
+        document.querySelectorAll(".section").forEach((section) => {
+          section.classList.remove("active");
+        });
+        document.getElementById(sectionId).classList.add("active");
+      }
+
+      // Mulai kuis
+      async function startQuiz() {
         try {
           const response = await fetch("soal.json");
-          if (!response.ok) throw new Error("Gagal memuat soal");
+          const data = await response.json();
 
-          quizData = await response.json();
-          userAnswers = new Array(quizData.length).fill(null);
-
-          document.getElementById("loading").style.display = "none";
-          document.getElementById("quiz-content").style.display = "block";
+          questions = data; // Mengambil 10 pertanyaan pertama
+          showSection("quiz");
+          resetQuiz();
           showQuestion();
+          startTimer();
         } catch (error) {
-          document.getElementById("loading").innerHTML = `
-            <div class="alert alert-danger">
-              <h4>Terjadi Kesalahan</h4>
-              <p>${error.message}</p>
-              <button onclick="location.reload()" class="btn btn-warning mt-2">
-                Coba Lagi
-              </button>
-            </div>`;
+          alert(error.message);
+          console.error(error);
         }
       }
 
+      // Reset kuis
+      function resetQuiz() {
+        currentQuestion = 0;
+        score = 0;
+        timeLeft = 15;
+        document.getElementById("score").textContent = "0";
+        document.getElementById("time").textContent = "15";
+      }
+
+      // Tampilkan pertanyaan
       function showQuestion() {
-        const question = quizData[currentQuestion];
-        const quizContent = document.getElementById("quiz-content");
+        const question = questions[currentQuestion];
+        document.getElementById("question-container").innerHTML = `
+                <h3>Pertanyaan ${currentQuestion + 1}</h3>
+                <p class="lead">${question.pertanyaan}</p>
+            `;
 
-        // Update progress
-        document.getElementById("progress").style.width = `${
-          ((currentQuestion + 1) / quizData.length) * 100
-        }%`;
+        document.getElementById("options-container").innerHTML =
+          question.pilihan
+            .map(
+              (option, index) => `
+                    <div class="option-card" 
+                         onclick="handleAnswer(${index})"
+                         data-answer="${option}">
+                        ${option}
+                    </div>
+                `
+            )
+            .join("");
 
-        // Build question HTML
-        let optionsHTML = question.pilihan
-          .map(
-            (option, index) => `
-          <label class="option-item">
-            <input 
-              type="${question.tipe === "benar_salah" ? "radio" : "radio"}" 
-              name="question-${question.nomor}" 
-              value="${index}"
-              ${userAnswers[currentQuestion] === index ? "checked" : ""}
-            >
-            ${option}
-          </label>
-        `
-          )
-          .join("");
+        document.getElementById("next-btn").disabled = true;
+      }
 
-        quizContent.innerHTML = `
-          <div class="question">
-            <div class="question-number">Pertanyaan ${question.nomor}</div>
-            <p>${question.pertanyaan}</p>
-            <div class="options-container">${optionsHTML}</div>
-          </div>
-        `;
+      // Handle jawaban
+      function handleAnswer(selectedIndex) {
+        clearInterval(timerInterval);
+        const options = document.querySelectorAll(".option-card");
+        const question = questions[currentQuestion];
+        const correctAnswer = question.jawaban_benar;
 
-        // Update navigation
-        document.getElementById("prev-btn").disabled = currentQuestion === 0;
-        document.getElementById("next-btn").disabled = false;
-        document.getElementById("submit-btn").style.display =
-          currentQuestion === quizData.length - 1 ? "block" : "none";
+        options.forEach((option, index) => {
+          option.style.pointerEvents = "none";
 
-        // Add event listeners
-        document.querySelectorAll('input[type="radio"]').forEach((radio) => {
-          radio.addEventListener("change", (e) => {
-            userAnswers[currentQuestion] = parseInt(e.target.value);
-          });
+          // Tandai jawaban benar
+          if (option.dataset.answer === correctAnswer) {
+            option.classList.add("correct");
+          }
+
+          // Tandai jawaban salah yang dipilih
+          if (
+            index === selectedIndex &&
+            option.dataset.answer !== correctAnswer
+          ) {
+            option.classList.add("wrong");
+          }
         });
+
+        // Update skor
+        if (question.pilihan[selectedIndex] === correctAnswer) {
+          score += 10;
+          document.getElementById("score").textContent = score;
+        }
+
+        document.getElementById("next-btn").disabled = false;
       }
 
-      function nextQuestion() {
-        if (currentQuestion < quizData.length - 1) {
+      // Timer
+      function startTimer() {
+        const timerElement = document.getElementById("time");
+        timerInterval = setInterval(() => {
+          timeLeft--;
+          timerElement.textContent = timeLeft;
+
+          if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            handleAnswer(-1); // Auto skip jika melebihi waktu
+          }
+        }, 1000);
+      }
+
+      // Tombol next
+      document.getElementById("next-btn").addEventListener("click", () => {
+        if (currentQuestion < questions.length - 1) {
           currentQuestion++;
+          timeLeft = 15;
+          document.getElementById("time").textContent = timeLeft;
           showQuestion();
+          startTimer();
+        } else {
+          showResult();
         }
+      });
+
+      // Tampilkan hasil
+      function showResult() {
+        showSection("result");
+        document.getElementById("final-score").textContent = score;
       }
-
-      function prevQuestion() {
-        if (currentQuestion > 0) {
-          currentQuestion--;
-          showQuestion();
-        }
-      }
-
-      function submitQuiz() {
-        const score = quizData.reduce((acc, question, index) => {
-          const userAnswer = question.pilihan[userAnswers[index]];
-          return acc + (userAnswer === question.jawaban_benar ? 1 : 0);
-        }, 0);
-
-        alert(`Anda Benar: ${score} dari ${quizData.length}`);
-      }
-
-      // Event listeners
-      document
-        .getElementById("next-btn")
-        .addEventListener("click", nextQuestion);
-      document
-        .getElementById("prev-btn")
-        .addEventListener("click", prevQuestion);
-      document
-        .getElementById("submit-btn")
-        .addEventListener("click", submitQuiz);
-      window.addEventListener("DOMContentLoaded", loadQuiz);
     </script>
   </body>
 </html>
