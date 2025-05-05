@@ -1,0 +1,91 @@
+@font-face {
+  font-family: poppins-bold;
+  src: url(fonts/Poppins/Poppins-SemiBold.ttf);
+}
+@font-face {
+  font-family: poppins-light;
+  src: url(fonts/Poppins/Poppins-Regular.ttf);
+}
+:root {
+  --primary-color: #5203ac;
+  --correct-color: #28a745;
+  --wrong-color: #dc3545;
+}
+body {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  min-height: 100vh;
+  font-family: poppins-light;
+}
+nav {
+  font-family: poppins-bold;
+}
+.bg-primary {
+  background-color: var(--primary-color);
+}
+.btn-primary,
+.btn-primary:disabled {
+  background-color: var(--primary-color);
+  border: #dee2e6;
+}
+.btn-primary:hover {
+  background-color: hsl(268, 97%, 45%);
+}
+.btn-primary:active {
+  background-color: hsl(268, 97%, 55%);
+}
+
+.section {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: none;
+}
+.section.active {
+  display: block;
+  animation: fadeIn 0.5s ease;
+}
+
+.option-card {
+  padding: 1.5rem;
+  margin: 0.5rem 0;
+  border: 2px solid #dee2e6;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.option-card.correct {
+  background-color: var(--correct-color) !important;
+  border-color: var(--correct-color) !important;
+  color: white !important;
+}
+
+.option-card.wrong {
+  background-color: var(--wrong-color) !important;
+  border-color: var(--wrong-color) !important;
+  color: white !important;
+}
+
+.timer {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: white;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
